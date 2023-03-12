@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menuMain">
+
+    <item
+        android:id="@+id/buttonAdd"
+        android:title="Ajouter possession"></item>
+    <item
+        android:id="@+id/buttonMod"
+        android:title="Modifier possession">
+        <!-- "file" submenu -->
+    </item>
+    <item
+        android:id="@+id/homeYou"
+        android:title="Vous"></item>
+</menu>

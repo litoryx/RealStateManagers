@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="isTablet">true</bool>
+    <dimen name="imageDetailHeight">700sp</dimen>
+    <dimen name="textSizeTextVal">35sp</dimen>
+    <dimen name="typeInList">20sp</dimen>
+    <dimen name="valorInList">25sp</dimen>
+    <dimen name="marginInListBlock">5sp</dimen>
+    <dimen name="marginInListInside">10sp</dimen>
+    <dimen name="wd">250sp</dimen>
+    <dimen name="wrapButtonAdd">100sp</dimen>
+    <dimen name="widthRecyclerList">275sp</dimen>
+    <dimen name="textSizeVal">50sp</dimen>
+</resources>
