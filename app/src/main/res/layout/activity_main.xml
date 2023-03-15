@@ -7,14 +7,6 @@
     tools:context=".MainActivity"
     android:clipToPadding="false">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/simpleSearchView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -131,6 +123,16 @@
             tools:context=".listrest.ListRestFragment"
             tools:listitem="@layout/fragment_list" />
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/marginInListInside"
+        android:src="@drawable/ic_baseline_manage_search_24"
+        app:backgroundTint="@color/bluesteel"
+        app:layout_constraintBottom_toTopOf="@id/add_possession"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_possession"

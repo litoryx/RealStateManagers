@@ -1,6 +1,7 @@
 package com.example.realstatemanagers;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +53,7 @@ public class ListPossessionRecyclerAdapter extends ListAdapter<Possession, ListP
         ImageView mImageView;
         ConstraintLayout posse;
         Listener mListener;
+        boolean isTablet;
 
         public ViewHolder(View view, Listener listener) {
             super(view);
@@ -61,6 +63,7 @@ public class ListPossessionRecyclerAdapter extends ListAdapter<Possession, ListP
             mImageView = view.findViewById(R.id.small_img);
             posse = view.findViewById(R.id.posse);
             mListener = listener;
+            isTablet = MainApplication.getApplication().getResources().getBoolean(R.bool.isTablet);
         }
 
         public void bind(Possession possession) {
@@ -69,11 +72,16 @@ public class ListPossessionRecyclerAdapter extends ListAdapter<Possession, ListP
             val_bien.setText(possession.getVal_bien());
             adr.setText(possession.getAdr());
 
-            Glide.with(mImageView.getContext()).load(possession.getPhto()).into(mImageView);
+            Uri don = Uri.parse(possession.getPhto());
 
-            posse.setOnClickListener(view -> {
+            Glide.with(mImageView.getContext()).load(don).into(mImageView);
+
+            if(isTablet) {
                 mListener.onItemClick(possession);
-                  });
+            }else{
+                posse.setOnClickListener(view -> mListener.onItemClick(possession));
+
+            }
         }
     }
 

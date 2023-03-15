@@ -9,9 +9,12 @@ import com.example.realstatemanagers.repository.AutoCompleteRepository;
 import com.example.realstatemanagers.repository.LocationRepository;
 import com.example.realstatemanagers.repository.PossessionRepository;
 import com.example.realstatemanagers.repository.SavePosMyDataBase;
+import com.example.realstatemanagers.repository.SearchRepository;
 import com.example.realstatemanagers.viewmodel.AddViewModel;
+import com.example.realstatemanagers.viewmodel.DetailViewModel;
 import com.example.realstatemanagers.viewmodel.GeoViewModel;
 import com.example.realstatemanagers.viewmodel.MainViewModel;
+import com.example.realstatemanagers.viewmodel.SearchViewModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
@@ -44,6 +47,7 @@ public class MainViewModelFactory implements ViewModelProvider.Factory {
     private final AutoCompleteRepository mAutoCompleteRepository = AutoCompleteRepository.getInstance();
     SavePosMyDataBase database = SavePosMyDataBase.getInstance(MainApplication.getApplication());
     private final PossessionRepository DataSe = new PossessionRepository(database.mPossessionDAO());
+    private final SearchRepository mSearchRepository = SearchRepository.getInstance();
     Executor executor = Executors.newSingleThreadExecutor();
 
     private MainViewModelFactory() {
@@ -54,11 +58,15 @@ public class MainViewModelFactory implements ViewModelProvider.Factory {
     @SuppressWarnings("unchecked")
     public <T extends ViewModel> T create(Class<T> modelClass) {
         if (modelClass.isAssignableFrom(MainViewModel.class)) {
-            return (T) new MainViewModel(DataSe, mLocationRepository, mPermissionChecker);
+            return (T) new MainViewModel(DataSe, mLocationRepository, mPermissionChecker, mSearchRepository);
         }else if(modelClass.isAssignableFrom(AddViewModel.class)){
             return (T) new AddViewModel(DataSe, executor);
         }else if(modelClass.isAssignableFrom(GeoViewModel.class)){
             return (T) new GeoViewModel(mLocationRepository, mPermissionChecker ,DataSe, mAutoCompleteRepository);
+        }else if(modelClass.isAssignableFrom(SearchViewModel.class)){
+            return (T) new SearchViewModel(mSearchRepository);
+        }else if(modelClass.isAssignableFrom(DetailViewModel.class)) {
+            return (T) new DetailViewModel(DataSe, mLocationRepository, mPermissionChecker, executor);
         }
         throw new IllegalArgumentException("Unknown ViewModel class");
     }

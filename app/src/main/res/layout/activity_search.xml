@@ -5,11 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".UpdateActivity">
+    tools:context=".SearchActivity">
+
+    <TextView
+        android:id="@+id/title_Search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recherche avancée"
+        android:textColor="@color/black"
+        android:layout_margin="15sp"
+        android:textSize="@dimen/textSizeTextVal"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/buttonBack"
@@ -20,24 +32,22 @@
         app:backgroundTint="@color/bluesteel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/mod_poss"/>
+        app:layout_constraintBottom_toTopOf="@id/linearLayout10"/>
 
-    <TextView
-        android:id="@+id/title_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Veuillez ajouter toutes les données"
-        android:layout_margin="@dimen/marginInListInside"
-        android:textColor="@color/black"
-        android:textSize="@dimen/textSizeTextVal"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<LinearLayout
+    android:id="@+id/linearLayout10"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:visibility="visible"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/buttonBack">
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mod_poss"
+        android:id="@+id/search_poss"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,7 +59,6 @@
         app:layout_constraintTop_toBottomOf="@id/buttonBack">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/typemod_poss"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -60,197 +69,252 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
-
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mod_place"
+        android:id="@+id/search_dateBegins"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/black"
         android:layout_margin="15dp"
-        android:textStyle="italic"
-        app:layout_constraintTop_toBottomOf="@id/mod_poss">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/quesPlace"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:textColor="@color/black"
-            android:ems="10"
-            android:hint="Endroit"
-            android:inputType="textPersonName" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mod_desc"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:textColorHint="@color/black"
-        android:layout_margin="15dp"
         android:textStyle="italic"
-        app:layout_constraintTop_toBottomOf="@id/mod_place">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/quesDesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:textColor="@color/black"
-            android:ems="10"
-            android:hint="Description"
-            android:inputType="textPersonName" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mod_val"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/black"
-        android:layout_margin="15dp"
-        android:textStyle="italic"
-        app:layout_constraintTop_toBottomOf="@id/mod_desc">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/quesVal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:textColor="@color/black"
-            android:ems="10"
-            android:hint="Valeur"
-            android:inputType="textPersonName" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mod_statut"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/black"
-        android:layout_margin="15dp"
-        android:textStyle="italic"
-        app:layout_constraintTop_toBottomOf="@id/mod_val">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/quesStatut"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:textColor="@color/black"
-            android:ems="10"
-            android:hint="Statut"
-            android:inputType="textPersonName" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mod_adr"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/black"
-        android:layout_margin="15dp"
-        android:textStyle="italic"
-        app:layout_constraintTop_toBottomOf="@id/mod_statut">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/quesAdr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:textColor="@color/black"
-            android:ems="10"
-            android:hint="Adresse"
-            android:inputType="textPersonName" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mod_surface"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/black"
-        android:layout_margin="15dp"
-        android:textStyle="italic"
-        app:layout_constraintTop_toBottomOf="@id/mod_adr">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/quesSurface"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:textColor="@color/black"
-            android:ems="10"
-            android:hint="Surface"
-            android:inputType="textPersonName" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mod_nbrePiece"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/black"
-        android:layout_margin="15dp"
-        android:textStyle="italic"
-        app:layout_constraintTop_toBottomOf="@id/mod_surface">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/quesNbrePiece"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:textColor="@color/black"
-            android:ems="10"
-            android:hint="Nbre de Pièce"
-            android:inputType="textPersonName" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mod_agent"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/black"
-        android:layout_margin="15dp"
-        android:textStyle="italic"
-        app:layout_constraintTop_toBottomOf="@id/mod_nbrePiece">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/quesAgent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:textColor="@color/black"
-            android:ems="10"
-            android:hint="Nom Agent"
-            android:inputType="textPersonName" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonMod"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/bluesteel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mod_agent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="Modifier"/>
+        app:layout_constraintTop_toBottomOf="@id/search_poss">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/typeSearch_begins"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="Date of begins"
+            android:inputType="textPersonName"
+            android:textColor="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/search_adresse"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:textColorHint="@color/black"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_dateBegins">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/typeSearch_adresse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="Adress"
+            android:inputType="textPersonName"
+            android:textColor="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/search_agent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:textColorHint="@color/black"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_adresse">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/typeSearch_agent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="Agent"
+            android:inputType="textPersonName"
+            android:textColor="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/search_minNbrePiece"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="160sp"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:textColorHint="@color/black"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_agent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/typeSearch_minNbrePiece"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="Min. Nbr of room"
+            android:inputType="textPersonName"
+            android:textColor="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/search_maxNbrePiece"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="160sp"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:textColorHint="@color/black"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_agent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/typeSearch_maxNbrePiece"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="Max. Nbr of room"
+            android:inputType="textPersonName"
+            android:textColor="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/search_minSurface"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="160sp"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:textColorHint="@color/black"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_minNbrePiece">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/typeSearch_minSurface"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="Min. Surface"
+            android:inputType="textPersonName"
+            android:textColor="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/search_maxSurface"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="160sp"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:textColorHint="@color/black"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_maxNbrePiece">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/typeSearch_maxSurface"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="Max. Surface"
+            android:inputType="textPersonName"
+            android:textColor="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/search_minPrice"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="160sp"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:textColorHint="@color/black"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_minSurface">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/typeSearch_minPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="Min. Price"
+            android:inputType="textPersonName"
+            android:textColor="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/search_maxPrice"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="160sp"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:textColorHint="@color/black"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_maxSurface">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/typeSearch_maxPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="Max. Price"
+            android:inputType="textPersonName"
+            android:textColor="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rechercher"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_maxPrice" />
+
+</LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_possessionSearch"
+        android:name="com.example.go4lunch.ListRestFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".listrest.ListRestFragment"
+        tools:listitem="@layout/fragment_list"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout10"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

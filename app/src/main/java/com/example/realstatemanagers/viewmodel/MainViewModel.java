@@ -1,12 +1,15 @@
 package com.example.realstatemanagers.viewmodel;
 
 import android.annotation.SuppressLint;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.realstatemanagers.Possession;
 import com.example.realstatemanagers.model.PermissionChecker;
+import com.example.realstatemanagers.model.SearchCriteria;
 import com.example.realstatemanagers.repository.LocationRepository;
 import com.example.realstatemanagers.repository.PossessionRepository;
+import com.example.realstatemanagers.repository.SearchRepository;
 import com.example.realstatemanagers.repository.Utils;
 
 import java.util.ArrayList;
@@ -16,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
 public class MainViewModel extends ViewModel {
@@ -24,33 +28,27 @@ public class MainViewModel extends ViewModel {
     PermissionChecker mPermissionChecker;
     LocationRepository mLocationRepository;
     LiveData<List<Possession>> search;
+    SearchRepository mSearchRepository;
 
-    @Nullable
-    String location;
-
-    public MainViewModel(PossessionRepository dataSource, LocationRepository locationRepository, PermissionChecker permissionChecker) {
+    public MainViewModel(PossessionRepository dataSource, LocationRepository locationRepository, PermissionChecker permissionChecker,SearchRepository searchRepository) {
         DataSource = dataSource;
         mLocationRepository = locationRepository;
         mPermissionChecker = permissionChecker;
+        mSearchRepository = searchRepository;
 
-        search = DataSource.getPossession();
+        LiveData<SearchCriteria> searchLiveData = searchRepository.getSearchTextLivedata();
 
-        mLocationRepository.getLocationLiveData().observeForever(s -> {
-            location = s;
-
+        search = Transformations.switchMap(searchLiveData, searchText -> {
+            if (searchText == null) {
+                return DataSource.getPossession();
+            } else {
+                Log.d("search",searchText.toString());
+                return DataSource.getPossessionQuery(searchText);
+            }
         });
     }
 
     public LiveData<List<Possession>> getPossession(){ return search; }
-
-    public LiveData<List<Possession>> updateSearchText(String text){
-        Log.d("geoview",""+text);
-
-        search = DataSource.getPossessionQuery(text);
-
-        Log.d("retourSearch",""+search);
-        return search;
-    }
 
     @SuppressLint("MissingPermission")
     public void refresh() {

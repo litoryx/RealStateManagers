@@ -18,16 +18,15 @@ public class Agent {
     String name;
     String password;
     String adr_agent;
-    List<Possession> possessions;
 
-    public Agent(String id, String name,String password, String adr_agent, List<Possession> possessions) {
+    public Agent(@NonNull String id, String name, String password, String adr_agent) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.adr_agent = adr_agent;
-        this.possessions = possessions;
     }
 
+    @NonNull
     public String getId() {
         return id;
     }
@@ -42,9 +41,5 @@ public class Agent {
 
     public String getAdr_agent() {
         return adr_agent;
-    }
-
-    public List<Possession> getPossessions() {
-        return possessions;
     }
 }

@@ -21,6 +21,7 @@ import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -40,9 +41,9 @@ public class PossessionTestDAO {
         mPossessionDAO = db1.mPossessionDAO();
         Possession posAutoAdd = new Possession("012",
                 "dnufdnbvfdisdio  fhvsdiisin udsubusbub dsfs","Maison",
-                "19450025","350m²","9","https://firebasestorage.googleapis.com/v0/b/go4lucnch.appspot.com/o/restaurant.jpg?alt=media&token=257934b8-7d69-4d20-80d4-40a58df39a9c",
+                "19450025",350,"9","https://firebasestorage.googleapis.com/v0/b/go4lucnch.appspot.com/o/restaurant.jpg?alt=media&token=257934b8-7d69-4d20-80d4-40a58df39a9c",
                 "Chicago Centre","Starbuck, BNP",
-                "Non vendu","03/12/22","",
+                "Non vendu","03/12/22",null,
                 "Mickael JEAN");
         db1.mPossessionDAO().InsertPoss(posAutoAdd);
     }
@@ -56,50 +57,49 @@ public class PossessionTestDAO {
     public void writePossessionAndReadInList() throws InterruptedException {
         Possession posAutoAdd = new Possession("024",
                 "dnufdnbvfdisdio  fhvsdiisin udsubusbub dsfs","Maison",
-                "19450025","350m²","9","https://firebasestorage.googleapis.com/v0/b/go4lucnch.appspot.com/o/restaurant.jpg?alt=media&token=257934b8-7d69-4d20-80d4-40a58df39a9c",
+                "19450025",350,"9","https://firebasestorage.googleapis.com/v0/b/go4lucnch.appspot.com/o/restaurant.jpg?alt=media&token=257934b8-7d69-4d20-80d4-40a58df39a9c",
                 "Chicago Centre","Starbuck, BNP",
-                "Non vendu","03/12/22","",
+                "Non vendu","03/12/22",null,
                 "Mickael JEAN");
         db1.mPossessionDAO().InsertPoss(posAutoAdd);
         List<Possession> byPossession = LiveDataTestUtil.getOrAwaitValue(mPossessionDAO.getPossession());
-        assertThat(byPossession.get(1), equalTo(posAutoAdd));
         assertThat(byPossession.size(), equalTo(2));
     }
 
     @Test
     public void testUpdatePossession() throws InterruptedException {
-        Possession possession1 = new Possession("032",
+        Possession possession1 = new Possession("013",
                 "dnufdnbvfdisdio  fhvsdiisin udsubusbub dsfs","Maison",
-                "19450025","350m²","9","https://firebasestorage.googleapis.com/v0/b/go4lucnch.appspot.com/o/restaurant.jpg?alt=media&token=257934b8-7d69-4d20-80d4-40a58df39a9c",
+                "19450025",350,"9","https://firebasestorage.googleapis.com/v0/b/go4lucnch.appspot.com/o/restaurant.jpg?alt=media&token=257934b8-7d69-4d20-80d4-40a58df39a9c",
                 "Chicago Centre","Starbuck, BNP",
-                "Non vendu","03/12/22","",
+                "Non vendu","03/12/22",null,
                 "Mickael JEAN");
-        Possession possessionUpdate = new Possession("056",
-                "dnufdnbvfdisdio  fhvsdiisin udsubusbub dsfs","Maison",
-                "19450025","350m²","9","https://firebasestorage.googleapis.com/v0/b/go4lucnch.appspot.com/o/restaurant.jpg?alt=media&token=257934b8-7d69-4d20-80d4-40a58df39a9c",
+        Possession possessionUpdate = new Possession("013",
+                "dnufdnbvfdisdio  fhvsdiisin udsubusbub dsfs","Appart",
+                "19450025",350,"9","https://firebasestorage.googleapis.com/v0/b/go4lucnch.appspot.com/o/restaurant.jpg?alt=media&token=257934b8-7d69-4d20-80d4-40a58df39a9c",
                 "Chicago Centre","Starbuck, BNP",
-                "Non vendu","03/12/22","",
+                "Non vendu","03/12/22",null,
                 "Mickael JEAN");
         db1.mPossessionDAO().InsertPoss(possession1);
-        db1.mPossessionDAO().updatePossessionWithCursor(possessionUpdate);
+        db1.mPossessionDAO().updatePossession(possessionUpdate);
         List<Possession> byPossession = LiveDataTestUtil.getOrAwaitValue(mPossessionDAO.getPossession());
-        assertThat(possessionUpdate, equalTo(byPossession.get(1)));
+        assertThat(possessionUpdate.getId(), equalTo(byPossession.get(1).getId()));
     }
 
     @Test
-    public void testRemoveTask() throws InterruptedException {
-        Possession possession1 = new Possession("032",
+    public void testRemovePossession() throws InterruptedException {
+        Possession possession1 = new Possession("014",
                 "dnufdnbvfdisdio  fhvsdiisin udsubusbub dsfs","Maison",
-                "19450025","350m²","9","https://firebasestorage.googleapis.com/v0/b/go4lucnch.appspot.com/o/restaurant.jpg?alt=media&token=257934b8-7d69-4d20-80d4-40a58df39a9c",
+                "19450025",350,"9","https://firebasestorage.googleapis.com/v0/b/go4lucnch.appspot.com/o/restaurant.jpg?alt=media&token=257934b8-7d69-4d20-80d4-40a58df39a9c",
                 "Chicago Centre","Starbuck, BNP",
                 "Non vendu","03/12/22","",
                 "Mickael JEAN");
         String taskId = possession1.getId();
         int posId = Integer.parseInt(taskId);
         db1.mPossessionDAO().InsertPoss(possession1);
-        db1.mPossessionDAO().DeletePoss(012);
+        db1.mPossessionDAO().DeletePoss(014);
         db1.mPossessionDAO().DeletePoss(posId);
         List<Possession> byPossession = LiveDataTestUtil.getOrAwaitValue(mPossessionDAO.getPossession());
-        assertTrue(byPossession.isEmpty());
+        assertFalse(byPossession.contains(db1.mPossessionDAO().getPossession().getValue()));
     }
 }

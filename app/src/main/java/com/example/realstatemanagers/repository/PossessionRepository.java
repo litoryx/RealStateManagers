@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.realstatemanagers.BuildConfig;
 import com.example.realstatemanagers.Possession;
+import com.example.realstatemanagers.model.SearchCriteria;
 import com.example.realstatemanagers.model.service.RetrofitService;
 import com.example.realstatemanagers.model.google.Place;
 import com.example.realstatemanagers.model.google.PlacesNearbySearchResponse;
@@ -33,20 +34,19 @@ public class PossessionRepository {
 
     public LiveData<List<Possession>> getPossession(){ return this.mPossessionDAO.getPossession();}
 
-    public LiveData<List<Possession>> getPossessionQuery(String possessionId){
-        Log.d("QueryPoss",""+possessionId);
+    public LiveData<List<Possession>> getPossessionQuery(SearchCriteria searchText){
+        Log.d("QueryPoss",""+searchText);
+        LiveData<List<Possession>> possList = mPossessionDAO.getPossessionsAskSurface(searchText.getMinSurface(),searchText.getMaxSurface());
 
-        String[] possessionList = possessionId.split(" ");
+        if(searchText.getType_search() != null){
+            possList = mPossessionDAO.getPossessionsAskSurfaceAndOther(searchText.getMinSurface(),searchText.getMaxSurface(), searchText.getType_search());
+        }
 
-            if (possessionList.length >= 2) {
-                possessions = mPossessionDAO.getPossessionsAsk(
-                        new SimpleSQLiteQuery("SELECT * FROM Possession WHERE id = ? OR type_bien = ? OR val_bien = ? OR surface = ? OR nbre_piece = ? OR adr = ?", possessionList));
-                return possessions;
-            } else {
-                return mPossessionDAO.getPossessionsAsk(
-                        new SimpleSQLiteQuery("SELECT * FROM Possession WHERE id = ? OR type_bien = ? OR val_bien = ? OR surface = ? OR nbre_piece = ? OR adr = ?", new String[]{possessionId, possessionId, possessionId, possessionId, possessionId, possessionId}));
-            }
+        return possList;
+    }
 
+    public void updatePhoto(Possession possession){
+        mPossessionDAO.updatePossession(possession);
     }
 
     public void insertPossession(Possession possession){mPossessionDAO.InsertPoss(possession);}

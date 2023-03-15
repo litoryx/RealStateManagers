@@ -15,6 +15,7 @@
         <entry key="..\:/Informatique/RealStateManagers/app/src/main/res/drawable/ic_baseline_add_48.xml" value="0.2095" />
         <entry key="..\:/Informatique/RealStateManagers/app/src/main/res/drawable/ic_baseline_add_64.xml" value="0.2095" />
         <entry key="..\:/Informatique/RealStateManagers/app/src/main/res/drawable/ic_baseline_add_72.xml" value="0.2095" />
+        <entry key="..\:/Informatique/RealStateManagers/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.125" />
         <entry key="..\:/Informatique/RealStateManagers/app/src/main/res/drawable/ic_baseline_my_location_24.xml" value="0.211" />
         <entry key="..\:/Informatique/RealStateManagers/app/src/main/res/drawable/ic_baseline_my_location_48.xml" value="0.211" />
         <entry key="..\:/Informatique/RealStateManagers/app/src/main/res/layout-land/activity_detail.xml" value="0.36770833333333336" />
@@ -32,9 +33,10 @@
         <entry key="..\:/Informatique/RealStateManagers/app/src/main/res/layout/activity_detail2.xml" value="0.11302083333333333" />
         <entry key="..\:/Informatique/RealStateManagers/app/src/main/res/layout/activity_geo.xml" value="0.11354166666666667" />
         <entry key="..\:/Informatique/RealStateManagers/app/src/main/res/layout/activity_main.xml" value="0.24010416666666667" />
+        <entry key="..\:/Informatique/RealStateManagers/app/src/main/res/layout/activity_search.xml" value="0.152" />
         <entry key="..\:/Informatique/RealStateManagers/app/src/main/res/layout/activity_second.xml" value="0.25416666666666665" />
         <entry key="..\:/Informatique/RealStateManagers/app/src/main/res/layout/activity_update.xml" value="0.264" />
-        <entry key="..\:/Informatique/RealStateManagers/app/src/main/res/layout/fragment_detail.xml" value="0.264" />
+        <entry key="..\:/Informatique/RealStateManagers/app/src/main/res/layout/fragment_detail.xml" value="0.22392638036809817" />
         <entry key="..\:/Informatique/RealStateManagers/app/src/main/res/layout/fragment_list.xml" value="0.2" />
         <entry key="..\:/Informatique/RealStateManagers/app/src/main/res/layout/fragment_list_poss.xml" value="0.11302083333333333" />
         <entry key="..\:/Informatique/RealStateManagers/app/src/main/res/layout/fragment_list_possession.xml" value="0.11302083333333333" />

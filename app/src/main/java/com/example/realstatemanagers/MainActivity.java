@@ -37,17 +37,14 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewMain;
     private TextView textViewquantityEtoD;
     private TextView textViewQuantity;
+    private TextView textViewEtoD;
     private TextView connexion;
     FloatingActionButton mAddButton;
     FloatingActionButton mGeoButton;
+    FloatingActionButton mSearchButton;
     RecyclerView mRecyclerView;
     MainViewModel mMainViewModel;
-    ListPossessionRecyclerAdapter.Listener mListener = new ListPossessionRecyclerAdapter.Listener() {
-        @Override
-        public void onItemClick(Possession possesion) {
-            MainActivity.this.onItemClick(possesion);
-              }
-    };
+    ListPossessionRecyclerAdapter.Listener mListener = MainActivity.this::onItemClick;
 
     ListPossessionRecyclerAdapter mListPoss = new ListPossessionRecyclerAdapter(mListener);
 
@@ -55,26 +52,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SearchView simpleSearchView = (SearchView) findViewById (R.id.simpleSearchView);
         textViewMain = findViewById(R.id.activity_main_activity_text_view_main);
         textViewQuantity = findViewById(R.id.activity_main_activity_text_view_quantity);
         textViewquantityEtoD = findViewById(R.id.activity_main_quantity_EurotoDoll);
+        textViewEtoD = findViewById(R.id.activity_main_EurotoDoll);
         connexion = findViewById(R.id.connexion);
         mAddButton = findViewById(R.id.add_possession);
         mGeoButton = findViewById(R.id.geo_loc);
+        mSearchButton = findViewById(R.id.add_search);
 
         mMainViewModel = new ViewModelProvider(this, MainViewModelFactory.getInstance()).get(MainViewModel.class);
 
         mRecyclerView = findViewById(R.id.list_possession);
+        mRecyclerView.setContentDescription("listmypossession");
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         mRecyclerView.setAdapter(mListPoss);
 
         getSupportActionBar();
 
+        textViewMain.setVisibility(View.VISIBLE);
+        textViewQuantity.setVisibility(View.VISIBLE);
+        textViewquantityEtoD.setVisibility(View.VISIBLE);
+        textViewEtoD.setVisibility(View.VISIBLE);
+        connexion.setVisibility(View.VISIBLE);
+
         mMainViewModel.getPossession().observe(this, list ->{
             mListPoss.submitList(list);
-            mListPoss.notifyDataSetChanged();
 
             Boolean isInternet = Utils.isInternetAvailable(getApplicationContext());
             int mConvertDtoE = Utils.convertDollarToEuro(100);
@@ -82,64 +86,39 @@ public class MainActivity extends AppCompatActivity {
             String mConvertString = getString(R.string.quantity, mConvertDtoE);
             String mConvertEtoDString = getString(R.string.quantity, mConvertSEtoD);
 
-            if (isInternet){connexion.setText("Vous êtes connecté");}else{connexion.setText("Vous n'êtes pas connecté");}
+            if (isInternet){connexion.setText(R.string.connect_test);}else{connexion.setText(R.string.notconnect_test);}
             textViewQuantity.setText(mConvertString);
             textViewquantityEtoD.setText(mConvertEtoDString);
         });
 
-        mAddButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent activityIntent = new Intent(MainActivity.this, AddActivity.class);
-                startActivity(activityIntent);
-            }
+        mAddButton.setOnClickListener(v -> {
+            Intent activityIntent = new Intent(MainActivity.this, AddActivity.class);
+            startActivity(activityIntent);
         });
 
-        simpleSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                Log.d("geoview",""+newText);
-                if(newText != null){
-                    updateSearch(newText);
-                    return true;}
-
-                return false;
-            }
+        mSearchButton.setOnClickListener(v -> {
+            Intent activityIntent = new Intent(MainActivity.this, SearchActivity.class);
+            startActivity(activityIntent);
         });
 
 
-        mGeoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent activityIntent = new Intent(MainActivity.this, GeoActivity.class);
-                startActivity(activityIntent);
-            }
+        mGeoButton.setOnClickListener(v -> {
+            Intent activityIntent = new Intent(MainActivity.this, GeoActivity.class);
+            startActivity(activityIntent);
         });
-    }
 
-    public void updateSearch(String newText){
-        if(newText != null) {
-            mMainViewModel.updateSearchText(newText).observe(this, possessionList -> {
-                mListPoss.submitList(possessionList);
-                mListPoss.notifyDataSetChanged();
-            });
-        }else{
-            mMainViewModel.getPossession().observe(this, list -> {
-                mListPoss.submitList(list);
-                mListPoss.notifyDataSetChanged();
-            });
-            }
+
     }
 
     public void onItemClick(Possession possession){
         boolean isTablet = getResources().getBoolean(R.bool.isTablet);
 
         if(isTablet){
+            textViewMain.setVisibility(View.GONE);
+            textViewQuantity.setVisibility(View.GONE);
+            textViewquantityEtoD.setVisibility(View.GONE);
+            textViewEtoD.setVisibility(View.GONE);
+            connexion.setVisibility(View.GONE);
             Fragment fragment = DetailFragment.newInstance(possession);
 
             getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.detail_container, fragment).commit();

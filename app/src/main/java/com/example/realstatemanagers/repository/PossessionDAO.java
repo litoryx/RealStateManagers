@@ -29,6 +29,12 @@ public interface PossessionDAO {
     @Query("select * from Possession")
     Cursor getPossessionWithCursor();
 
+    @Query("select * from Possession where surface between :minSurface and :maxSurface")
+    LiveData<List<Possession>> getPossessionsAskSurface(int minSurface, int maxSurface);
+
+    @Query("select * from Possession where (surface between :minSurface and :maxSurface) and type_bien = :type")
+    LiveData<List<Possession>> getPossessionsAskSurfaceAndOther(int minSurface, int maxSurface, String type);
+
     @Query("delete from Possession where id = :possessionId")
     int DeletePoss(long possessionId);
 

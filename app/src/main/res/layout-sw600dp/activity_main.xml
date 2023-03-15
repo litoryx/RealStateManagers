@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_possession"
@@ -22,12 +24,12 @@
         android:id="@+id/activity_main_activity_text_view_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Voici la valeur d'un bien : "
+        android:text="Conversion d'un bien (ED): "
         android:textSize="@dimen/textSizeTextVal"
         android:textStyle="bold"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/list_possession"
+        app:layout_constraintStart_toEndOf="@id/list_possession"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -42,16 +44,43 @@
         app:layout_constraintStart_toEndOf="@+id/activity_main_activity_text_view_main"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/simpleSearchView"
-        android:layout_width="@dimen/wrapButtonAdd"
-        android:layout_height="@dimen/wrapButtonAdd"
-        android:layout_margin="5sp"
+    <TextView
+        android:id="@+id/activity_main_EurotoDoll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Conversion d'un bien (DE): "
+        android:textColor="@color/black"
+        android:textSize="@dimen/textSizeTextVal"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/list_possession"
+        app:layout_constraintTop_toBottomOf="@+id/activity_main_activity_text_view_main" />
 
-    <androidx.fragment.app.FragmentContainerView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <TextView
+        android:id="@+id/activity_main_quantity_EurotoDoll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="@dimen/textSizeTextVal"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/activity_main_activity_text_view_quantity"
+        app:layout_constraintStart_toEndOf="@+id/activity_main_EurotoDoll" />
+
+    <TextView
+        android:id="@+id/connexion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="@dimen/textSizeTextVal"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/list_possession"
+        app:layout_constraintTop_toBottomOf="@+id/activity_main_EurotoDoll" />
+
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/detail_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -63,12 +92,24 @@
     </androidx.fragment.app.FragmentContainerView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_search"
+        android:layout_width="@dimen/wrapButtonAdd"
+        android:layout_height="@dimen/wrapButtonAdd"
+        android:layout_margin="@dimen/marginInListInside"
+        android:src="@drawable/ic_baseline_manage_search_24"
+        app:backgroundTint="@color/bluesteel"
+        app:fabCustomSize="@dimen/wrapButtonAdd"
+        app:layout_constraintBottom_toTopOf="@id/add_possession"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_possession"
         android:layout_width="@dimen/wrapButtonAdd"
         android:layout_height="@dimen/wrapButtonAdd"
         android:layout_gravity="center"
         android:layout_margin="@dimen/marginInListInside"
         android:src="@drawable/ic_baseline_add_24"
+        app:fabCustomSize="@dimen/wrapButtonAdd"
         app:backgroundTint="@color/bluesteel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -80,6 +121,7 @@
         android:layout_margin="@dimen/marginInListInside"
         android:src="@drawable/ic_baseline_my_location_24"
         app:backgroundTint="@color/bluesteel"
+        app:fabCustomSize="@dimen/wrapButtonAdd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/add_possession" />
 </androidx.constraintlayout.widget.ConstraintLayout>

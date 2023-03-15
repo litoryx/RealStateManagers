@@ -6,15 +6,27 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="match_parent"
         android:layout_height="@dimen/imageDetailHeight"
+        app:contentDescription="@string/img_possession"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/buttonBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/marginInListInside"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:backgroundTint="@color/bluesteel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:contentDescription="@string/img_possession" />
 
     <TextView
         android:id="@+id/detail_val"
@@ -22,7 +34,7 @@
         android:layout_height="match_parent"
         android:layout_margin="15dp"
         android:gravity="center"
-        android:text="14785200 $"
+        android:text="@string/val_test"
         android:textColor="@color/bluesteel"
         android:textSize="@dimen/textSizeVal"
         android:textStyle="bold"
@@ -38,8 +50,8 @@
         android:layout_margin="15dp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:text="Maison"
-        android:textSize="25dp"
+        android:text="@string/type_test"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_val" />
@@ -50,7 +62,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_margin="15dp"
-        android:text="Manhattan"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_type" />
@@ -61,7 +73,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_margin="15dp"
-        android:text="fgdsvnofdi ciodsvnfsbvfdn  dpshsiffsdpf iuhdfibf ufibvuifdbv fuvufnvsv ufugiv fubye"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_adr" />
@@ -196,9 +208,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
+        android:layout_marginTop="288dp"
         android:columnCount="3"
         android:rowCount="1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gridLayout3">
 
@@ -250,9 +264,20 @@
         app:layout_constraintTop_toBottomOf="@id/mapDetail"/>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonGal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/bluesteel"
+        android:text="Photo +"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonMod"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/bluesteel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -260,5 +285,4 @@
         android:text="Modifier"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
 </ScrollView>

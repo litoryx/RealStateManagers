@@ -1,6 +1,7 @@
 package com.example.realstatemanagers;
 
 import android.content.ContentValues;
+import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
@@ -22,7 +23,7 @@ public class Possession implements Parcelable {
     String desc;
     String type_bien;
     String val_bien;
-    String surface;
+    int surface;
     String nbre_piece;
     String phto;
     String adr;
@@ -32,7 +33,7 @@ public class Possession implements Parcelable {
     String date_send;
     String agent;
 
-    public Possession(String id, String desc, String type_bien, String val_bien, String surface, String nbre_piece, String phto, String adr, String PI_proximite, String statut, String date_begin, String date_send, String agent) {
+    public Possession(@NonNull String id, String desc, String type_bien, String val_bien, int surface, String nbre_piece, String phto, String adr, String PI_proximite, String statut, String date_begin, String date_send, String agent) {
         this.id = id;
         this.desc = desc;
         this.type_bien = type_bien;
@@ -53,7 +54,7 @@ public class Possession implements Parcelable {
         desc = in.readString();
         type_bien = in.readString();
         val_bien = in.readString();
-        surface = in.readString();
+        surface = in.readInt();
         nbre_piece = in.readString();
         phto = in.readString();
         adr = in.readString();
@@ -76,6 +77,7 @@ public class Possession implements Parcelable {
         }
     };
 
+    @NonNull
     public String getId() {
         return id;
     }
@@ -93,7 +95,7 @@ public class Possession implements Parcelable {
         return val_bien;
     }
 
-    public String getSurface() {
+    public int getSurface() {
         return surface;
     }
 
@@ -103,6 +105,10 @@ public class Possession implements Parcelable {
 
     public String getPhto() {
         return phto;
+    }
+
+    public void setPhto(String phto) {
+        this.phto = phto;
     }
 
     public String getAdr() {
@@ -131,11 +137,9 @@ public class Possession implements Parcelable {
 
     public static Possession fromContentValues(ContentValues values){
 
-        Possession possession = new Possession(values.getAsString("text"),values.getAsString("text"),values.getAsString("text"),
-                values.getAsString("text"),values.getAsString("text"),values.getAsString("text"),values.getAsString("text"),
+        return new Possession(values.getAsString("text"),values.getAsString("text"),values.getAsString("text"),
+                values.getAsString("text"),values.getAsInteger("text"),values.getAsString("text"),values.getAsString("text"),
                 values.getAsString("text"),values.getAsString("text"),values.getAsString("text"),values.getAsString("text"),values.getAsString("text"),values.getAsString("text"));
-
-        return possession;
     }
 
     @Override
@@ -149,7 +153,7 @@ public class Possession implements Parcelable {
         parcel.writeString(desc);
         parcel.writeString(type_bien);
         parcel.writeString(val_bien);
-        parcel.writeString(surface);
+        parcel.writeInt(surface);
         parcel.writeString(nbre_piece);
         parcel.writeString(phto);
         parcel.writeString(adr);

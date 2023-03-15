@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/img_possession" />
 
     <TextView
         android:id="@+id/detail_val"
@@ -33,55 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
-    <TextView
-        android:id="@+id/title_media"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_margin="30dp"
-        android:text="Média"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detail_val" />
 
-    <GridLayout
-        android:id="@+id/gridLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:columnCount="4"
-        android:rowCount="1"
-        android:useDefaultMargins="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_media">
-
-        <ImageView
-            android:id="@+id/pht1"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:contentDescription="" />
-
-        <ImageView
-            android:id="@+id/pht2"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:contentDescription="" />
-
-        <ImageView
-            android:id="@+id/face"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:contentDescription="" />
-
-
-        <ImageView
-            android:id="@+id/pht4"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:contentDescription="" />
-    </GridLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -91,8 +43,8 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/title_desc"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridLayout2"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/detail_val"
+        app:layout_constraintStart_toStartOf="parent" >
 
         <TextView
             android:id="@+id/detail_type"
@@ -319,8 +271,9 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mapDetail"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
+        android:layout_width="800sp"
         android:layout_height="500sp"
+        android:layout_marginTop="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/gridLayout7"/>
@@ -329,6 +282,7 @@
         android:id="@+id/simpleVideoView"
         android:layout_width="match_parent"
         android:layout_height="500sp"
+        android:layout_marginTop="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mapDetail"/>
@@ -337,6 +291,7 @@
         android:id="@+id/buttonMod"
         android:layout_width="175sp"
         android:layout_height="100sp"
+        android:backgroundTint="@color/bluesteel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

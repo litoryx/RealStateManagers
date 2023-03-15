@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">RealStateManagers</string>
     <string name="quantity">%d</string>
+    <string name="img_possession">img_possession</string>
+    <string name="val_test">14785200 $</string>
+    <string name="type_test">Maison</string>
+    <string name="endroit">Manhattan</string>
+    <string name="desc_test">fgdsvnofdi ciodsvnfsbvfdn  dpshsiffsdpf iuhdfibf ufibvuifdbv fuvufnvsv ufugiv fubye</string>
+    <string name="connect_test">Vous êtes connecté</string>
+    <string name="notconnect_test">Vous êtes pas connecté</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

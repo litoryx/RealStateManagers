@@ -31,8 +31,6 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Possession possession = intent.getParcelableExtra("mPossession");
 
-
-
         Fragment fragment = DetailFragment.newInstance(possession);
 
         getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.detail_container, fragment).commit();

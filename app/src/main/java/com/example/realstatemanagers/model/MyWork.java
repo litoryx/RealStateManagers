@@ -4,11 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 
-import com.example.realstatemanagers.DetailActivity;
+import com.example.realstatemanagers.MainActivity;
 import com.example.realstatemanagers.R;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.work.Worker;
@@ -28,18 +30,19 @@ public class MyWork extends Worker {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("MissingPermission")
     @NonNull
     @Override
     public Result doWork() {
 
-        intent = new Intent(getApplicationContext(), DetailActivity.class);
+        intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        String title = "L'heure de déjeuner";
-        String textContent = "Venez choisir votre restaurant pas très loin avant d'aller le chercher à la main. lol";
+        String title = "Ajout effectué";
+        String textContent = "L'ajout de l'utilisateur a été effectué";
 
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "12")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "11")
                 .setSmallIcon(R.drawable.baseline_home_24)
                 .setContentTitle(title)
                 .setContentText(textContent)
@@ -49,7 +52,7 @@ public class MyWork extends Worker {
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
 
-        notificationManager.notify(12, builder.build());
+        notificationManager.notify(11, builder.build());
         return Result.success();
     }
 }
