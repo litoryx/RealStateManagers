@@ -74,7 +74,9 @@ public class ListPossessionRecyclerAdapter extends ListAdapter<Possession, ListP
 
             Uri don = Uri.parse(possession.getPhto());
 
-            Glide.with(mImageView.getContext()).load(don).into(mImageView);
+            Glide.with(mImageView.getContext())
+                    .load(Uri.parse(possession.getPhto()))
+                    .into(mImageView);
 
             if(isTablet) {
                 mListener.onItemClick(possession);
