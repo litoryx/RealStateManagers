@@ -4,6 +4,8 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -21,6 +23,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +45,12 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -126,8 +134,8 @@ public class DetailFragment extends Fragment implements
         fragment.getMapAsync( this);
 
         ActivityCompat.requestPermissions(requireActivity(),
-                new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                0
+                new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                1
         );
 
         if(getContext() != null) {
@@ -157,7 +165,7 @@ public class DetailFragment extends Fragment implements
             ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
                     new ActivityResultContracts.StartActivityForResult(),
                     result -> {
-                        if (result.getResultCode() == Activity.RESULT_OK) {
+                        if (result.getResultCode() == RESULT_OK) {
                             Intent intent = result.getData();
 
                                 Possession possession = intent.getParcelableExtra("mPossMod");
@@ -177,17 +185,16 @@ public class DetailFragment extends Fragment implements
                 @Override
                 public void onClick(View v) {
                     //Créer un Intent avec une action  ACTION_PICK
-                    Intent i =new Intent();
-                    //Définissez le type comme image/*.
-                    //Cela garantit que seuls les composants de type image sont sélectionnés
-                    i.setType("image/*");
-                    i.setAction(Intent.ACTION_GET_CONTENT);
-                    //Nous passons un tableau supplémentaire avec les types MIME acceptés.
-                    //Cela garantira que seuls les composants avec ces types MIME sont ciblés.
+                    Intent openDocumentIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                    openDocumentIntent.setType("image/*");
+                    openDocumentIntent.setFlags(
+                            Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
+                            | Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                            | Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     String[] mimeTypes = {"image/jpeg", "image/png","image/jpg"};
-                    i.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
-                    //Lancer l'Intent
-                    startActivityForResult(Intent.createChooser(i,"Select Picture"),1);
+                    openDocumentIntent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
+                    startActivityForResult(openDocumentIntent, 1);
+
                 }
             });
 
@@ -206,6 +213,10 @@ public class DetailFragment extends Fragment implements
             if (requestCode == 1) {//data.getData renvoie l'URI de contenu pour l'image sélectionnée
                 Uri selectedImage = data.getData();
                 String selectimageString = selectedImage.toString();
+                requireActivity().getContentResolver().takePersistableUriPermission(
+                        selectedImage,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                );
 
                 Log.d("verfiImg", "" + selectimageString);
                 mPossession.setPhto(selectimageString);

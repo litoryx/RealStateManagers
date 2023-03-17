@@ -3,6 +3,7 @@ package com.example.realstatemanagers;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
@@ -70,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mListPoss);
 
         getSupportActionBar();
+
+        ActivityCompat.requestPermissions(this,
+                new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                1
+        );
 
         textViewMain.setVisibility(View.VISIBLE);
         textViewQuantity.setVisibility(View.VISIBLE);

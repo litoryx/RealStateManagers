@@ -1,5 +1,6 @@
 package com.example.realstatemanagers;
 
+import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
@@ -13,6 +14,7 @@ import com.bumptech.glide.Glide;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
@@ -38,6 +40,7 @@ public class ListPossessionRecyclerAdapter extends ListAdapter<Possession, ListP
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_list, parent, false);
+
         return new ViewHolder(view, listener);
     }
 
@@ -71,8 +74,6 @@ public class ListPossessionRecyclerAdapter extends ListAdapter<Possession, ListP
             type_bien.setText(possession.getType_bien());
             val_bien.setText(possession.getVal_bien());
             adr.setText(possession.getAdr());
-
-            Uri don = Uri.parse(possession.getPhto());
 
             Glide.with(mImageView.getContext())
                     .load(Uri.parse(possession.getPhto()))
