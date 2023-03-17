@@ -66,24 +66,6 @@ public class UpdateActivity extends AppCompatActivity {
 
         this.mAddViewModel = new ViewModelProvider(this, MainViewModelFactory.getInstance()).get(AddViewModel.class);
 
-        mButtonGal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Créer un Intent avec une action  ACTION_PICK
-                Intent i =new Intent();
-                //Définissez le type comme image/*.
-                //Cela garantit que seuls les composants de type image sont sélectionnés
-                i.setType("image/*");
-                i.setAction(Intent.ACTION_GET_CONTENT);
-                //Nous passons un tableau supplémentaire avec les types MIME acceptés.
-                //Cela garantira que seuls les composants avec ces types MIME sont ciblés.
-                String[] mimeTypes = {"image/jpeg", "image/png","image/jpg"};
-                i.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
-                //Lancer l'Intent
-                startActivityForResult(Intent.createChooser(i,"Select Picture"),1);
-            }
-        });
-
         if(imgDecodableString == null){imgDecodableString = null;}
         Log.d("verifimg",""+imgDecodableString);
 
@@ -117,19 +99,6 @@ public class UpdateActivity extends AppCompatActivity {
             Intent activityIntent = new Intent(UpdateActivity.this, MainActivity.class);
             startActivity(activityIntent);
         });
-    }
-
-    public void onActivityResult(int requestCode,int resultCode,Intent data) {
-        //Le code de résultat est RESULT_OK uniquement si l'utilisateur sélectionne une image.
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK)
-            if (requestCode == 1) {//data.getData renvoie l'URI de contenu pour l'image sélectionnée
-                Uri selectedImage = data.getData();
-                String selectimageString = selectedImage.toString();
-
-                Log.d("verfiImg", "" + selectimageString);
-                //Définir l'image dans ImageView après le décodage de la chaîne
-            }
     }
 
     public void updatePossession(Possession possession){
